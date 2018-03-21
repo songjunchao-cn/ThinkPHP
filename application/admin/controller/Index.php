@@ -1,10 +1,10 @@
 <?php
 namespace app\admin\controller;
-class Index{
+use think\Controller;
+class Index extends Controller{
 public function index()
   {
-    return "我是后台主页控制器";
-    # code...
+    return $this->fetch();
   }
 }
- ?>
+?>
