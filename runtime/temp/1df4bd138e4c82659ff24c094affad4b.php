@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"C:\wamp64\www\tp5\public/../application/admin\view\member\memberadd.html";i:1521602813;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"C:\wamp64\www\tp5\public/../application/admin\view\member\memberadd.html";i:1522126283;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,13 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="_PUBLIC__/css/font.css">
-	<link rel="stylesheet" href="http://www.sjc.com/static/admin/css/xadmin.css">
+	  <link rel="stylesheet" href="http://www.sjc.com/static/admin/css/xadmin.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <script src="http://www.sjc.com/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="http://www.sjc.com/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
     <!-- 中部开始 -->
@@ -22,7 +21,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" action="" method="post" >
+            <form class="layui-form" action="" method="post"  enctype="multipart/form-data">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱

@@ -1,9 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"C:\wamp64\www\tp5\public/../application/admin\view\member\memberlist.html";i:1521607708;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"C:\wamp64\www\tp5\public/../application/admin\view\member\memberlist.html";i:1522158063;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>后台登录-VR-FAMILY</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="http://www.sjc.com/static/admin/css/font.css">
@@ -18,7 +18,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">VR-FAMILY V1.0</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -49,20 +49,20 @@
                 <li class="list">
                     <a href="javascript:;">
                         <i class="iconfont">&#xe70b;</i>
-                        会员管理
+                        用户管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu opened">
                         <li>
                             <a href="<?php echo url('Member/memberlist'); ?>">
                                 <i class="iconfont">&#xe6a7;</i>
-                                会员列表
+                                用户列表
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo url('Member/memberdel'); ?>">
                                 <i class="iconfont">&#xe6a7;</i>
-                                会员删除
+                                用户删除
                             </a>
                         </li>
                         <li>
@@ -88,14 +88,14 @@
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe6a3;</i>
-                        分类管理
+                        网址管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="./category.html">
+                            <a href="<?php echo url('web/webdel'); ?>">
                                 <i class="iconfont">&#xe6a7;</i>
-                                分类列表
+                                网址列表
                             </a>
                         </li>
                     </ul>
@@ -118,14 +118,29 @@
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe6a3;</i>
-                        管理员管理
+                        文章管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="./banner-list.html">
+                            <a href="<?php echo url('article/articlelist'); ?>">
                                 <i class="iconfont">&#xe6a7;</i>
-                                轮播列表
+                                文章列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        视频管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="<?php echo url('video/videolist'); ?>">
+                                <i class="iconfont">&#xe6a7;</i>
+                                视频列表
                             </a>
                         </li>
                     </ul>
@@ -181,21 +196,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
-                        系统设置
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" style="display:none">
-                        <li>
-                            <a href="./banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                轮播列表
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
             </ul>
           </div>
         </div>
@@ -264,32 +265,33 @@
                     </tr>
                 </thead>
                 <tbody>
+                  <?php if(is_array($memberlist) || $memberlist instanceof \think\Collection || $memberlist instanceof \think\Paginator): $i = 0; $__LIST__ = $memberlist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                     <tr>
                         <td>
                             <input type="checkbox" value="1" name="">
                         </td>
                         <td>
-                            1
+                            <?php echo $vo['member_id']; ?>
                         </td>
                         <td>
                             <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
+                                <?php echo $vo['member_username']; ?>
                             </u>
                         </td>
                         <td >
-                            男
+                            <?php echo $vo['member_sex']; ?>
                         </td>
                         <td >
-                            13000000000
+                            <?php echo $vo['member_tel']; ?>
                         </td>
                         <td >
-                            admin@mail.com
+                             <?php echo $vo['member_email']; ?>
                         </td>
                         <td >
-                            北京市 海淀区
+                            <?php echo $vo['member_ad']; ?>
                         </td>
                         <td>
-                            2017-01-01 11:11:42
+                            <?php echo $vo['member_time']; ?>
                         </td>
                         <td class="td-status">
                             <span class="layui-btn layui-btn-normal layui-btn-mini">
@@ -300,70 +302,21 @@
                             <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe601;</i>
                             </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('编辑','memberedit?member_id=<?php echo $vo['member_id']; ?>','500','800')"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改密码','member-password.html','10001','600','400')"
+                            <a style="text-decoration:none"  onclick="member_password('修改密码','memberpassword','10001','600','400')"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'<?php echo $vo['member_id']; ?>')"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-                        <td class="td-status">
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                已启用
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')"
-                            class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改密码','member-password.html','10001','600','400')"
-                            href="javascript:;" title="修改密码">
-                                <i class="layui-icon">&#xe631;</i>
-                            </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                        </td>
-                    </tr>
+                    <?php endforeach; endif; else: echo "" ;endif; ?>
                 </tbody>
             </table>
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -487,11 +440,38 @@
         }
         /*用户-删除*/
         function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
+            layer.confirm('确认要删除吗？'
+            ,function(index){
+              $.ajax({
+                  type: 'POST',
+                  url:"<?php echo url('member/memberdel'); ?>",
+                  dataType :'json',
+                  data:{member_id:id},
+                  success:function(data){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                  },
+                  error:function(data){
+                    console.log(data.msg);
+                  },
+                });
             });
+
+       //      layer.confirm('您确定要删除我吗？', {   // 使用layer.js确认弹窗
+       //      btn: ['确定', '取消'],
+       //      }, function() {                        // 当确定时执行
+       //     $.post("<?php echo url('Member/memberdel'); ?>", {    // 网址、数据、成功后操作
+       //     "_token": "{{ csrf_token() }}",
+       //    "_method": "delete"
+       //     }, function(data) {
+       //     if (data.status == 0) {
+       //     layer.msg(data.msg, { icon: 6});
+       //     location.href = "{{ url('user/index') }}";
+       //     } else {
+       //     layer.msg(data.msg, { icon: 5});
+       // }
+       // });
+       //  }, function() {});
         }
         </script>
         <script>
