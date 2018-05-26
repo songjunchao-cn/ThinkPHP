@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"C:\wamp64\www\tp5\public/../application/admin\view\video\videoadd.html";i:1522160574;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"C:\wamp64\www\tp5\public/../application/admin\view\video\videoadd.html";i:1526488019;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +21,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" action=""  enctype="multipart/form-data" method="post"  >
+            <form class="layui-form" action=""  enctype="multipart/form-data" method="post" id="uploadForm" >
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>标题
@@ -30,9 +30,7 @@
                         <input type="text" id="L_email" name="title" required=""
                         autocomplete="on" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>将会成为您唯一的登入名
-                    </div>
+                    
                 </div>
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
@@ -55,6 +53,18 @@
                         上传你的视频
                     </div>
                 </div>
+								<div class="layui-form-item">
+                    <label for="pic" class="layui-form-label">
+                        <span class="x-red">*</span>内容
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="file" id="pic" name="pic" required=""
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        上传你的图片
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                         <span class="x-red">*</span>作者
@@ -67,7 +77,7 @@
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" id="video-add" type="button">
                         增加
                     </button>
                 </div>
@@ -79,14 +89,12 @@
     </div>
     <!-- 中部结束 -->
     <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
+		$("#video-add").click(
+	function (){
+		var url="<?php echo url('Video/videoadd'); ?>";
+		var data= new FormData($('#uploadForm')[0]);
+		doAjax(url,data);
+	});
     </script>
 </body>
 </html>

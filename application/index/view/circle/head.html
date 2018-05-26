@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>circle</title>
+		<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+		<link rel="stylesheet" href="__PUBLIC__/css/circle_global.css">
+		<script src="__PUBLIC__/layui/layui.js"></script>
+		<style>
+
+
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="main">
+				<a class="title"title="">资源圈子</a>
+				<div class="nav-user">
+					<!-- 登入后的状态 -->
+					<a class="avatar">
+						{if condition="$Request.session.membername neq '' "}
+						<img src="__IMG__{$Request.session.memberpic}" alt="无头像">
+						<cite>{$Request.session.membername}</cite>
+						<i>已登录</i>
+					</a>
+					<div class="nav">
+						<a href="{:url('Circle/out')}"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退出</a>
+					</div>
+					{else/}
+					<!-- <img src="__IMG__{$Request.session.memberpic}" alt="已退出"> -->
+					<cite>{$Request.session.membername}</cite>
+					<i>未登录</i>
+				</a>
+				<!-- <div class="nav">
+					<a href="javascript:window.location.her"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>登录</a>
+				</div> -->
+				{/if}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

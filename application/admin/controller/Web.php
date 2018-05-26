@@ -3,9 +3,15 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use app\admin\model\Web as WebModel;
-class Web extends Controller{
+class Web extends BaseAdmin{
 public function weblist(){
-  $list = WebModel::paginate(5);
+  $count =db('web')->count();
+  $page = $this->request->param('page',1,'intval');
+  $limit = $this->request->param('limit',10,'intval');
+  $list = db('web')->order('web_id desc')->select();
+  $this->assign('count',$count);
+  $this->assign('page',$page);
+  $this->assign('limit',$limit);
   $this->assign('weblist',$list);
   return $this->fetch();
  }
@@ -17,47 +23,48 @@ public function webadd(){
        'web_desc'=>input('desc'),
        'web_time'=>input('time'),
 
+
+
      ];
-       var_dump($data);
+     if($_FILES['web_pic']['tmp_name']){
+        $file = request()->file('web_pic');
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        $data['web_pic']='/uploads/'.$info->getSaveName();
+     }
      if(Db::name('web')->insert($data)){
-        var_dump($data);
-       return $this->success('添加成功','weblist');
+       return json(['status'=>1, 'info'=>'成功']);
      }
        else{
-         return $this->error('添加失败');
+        return json(['status'=>0, 'info'=>'失败']);
        }
-   //   if(request()->isPost()){
-   //   dump(input('post.'));
-   //   return;
-   // }
      return;
    }
    return $this->fetch();
   }
 public function webedit(){
   $id= input('web_id');
-  dump($id);
   $web = Db::table('web')->where('web_id',$id)->find();
-  dump($web);
   $this->assign('web',$web);
-
   if(request()->isPost()){
     $data=[
-      // 'web_id'=>input('id'),
       'web_title'=>input('title'),
       'web_url'=>input('url'),
       'web_desc'=>input('desc'),
       'web_time'=>input('time'),
-
     ];
+    if($_FILES['web_pic']['tmp_name']){
+       $file = request()->file('web_pic');
+       $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+       $data['web_pic']='/uploads/'.$info->getSaveName();
+    }
+
 
      // dump($data);die;
     if(Db::name('web')->where('web_id',$id)->update($data)){
-      // $this->success('修改成功','weblist');
-      $this->success('ar');
+      return json(['status'=>1, 'info'=>'成功']);
     }
     else{
-      $this->error('失败');
+      return json(['status'=>0, 'info'=>'失败']);
     }
       return;
     }
@@ -74,8 +81,17 @@ public function webdel(){
   }
   return $this->fetch();
  }
-public function webview(){
-  return $this->fetch();
- }
+ public function websdel(){
+     $arr=input('checkedArr/a');
+     $id= join(',',$arr);
+        $del= db('web')->where(array('web_id' =>array('in',$id)))->delete();
+     if ($del) {
+         return json(['status'=>1, 'info'=>'删除成功']);
+     }
+     else {
+        return json(['status'=>0, 'info'=>'删除失败']);
+     }
+
+  }
 }
 ?>

@@ -1,0 +1,78 @@
+
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VR-NAV &mdash; HTML</title>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Roboto:400,300,700' rel='stylesheet' type='text/css'>
+	<!-- Animate -->
+	<link rel="stylesheet" href="__PUBLIC__/css/animate.css">
+	<!-- Icomoon -->
+	<link rel="stylesheet" href="__PUBLIC__/css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.css">
+
+	<link rel="stylesheet" href="__PUBLIC__/css/navstyle.css">
+
+
+	<!-- Modernizr JS -->
+	<script src="__PUBLIC__/js/libs/modernizr-2.6.2.min.js"></script>
+	</head>
+	<body>
+	<header id="fh5co-header">
+
+		<div class="container-fluid">
+
+			<div class="row">
+				<a href="/index"> <i></i>返回首页</a>
+				<div class="col-lg-12 col-md-12 text-center">
+					<h1 id="fh5co-logo"><a href="index.html">video <sup>TM</sup></a></h1>
+				</div>
+
+			</div>
+
+		</div>
+
+	</header>
+    <div class="copyrights"><a>VR-VIDEO</a></div>
+	<!-- END #fh5co-header -->
+	<div class="container-fluid">
+		<div class="row fh5co-post-entry">
+				{volist name="videolist" id="vo"}
+			<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+
+				<figure>
+					<a href="video?video_id={$vo.video_id}"><img src="__IMG__{$vo.video_pic}" alt="Image" class="img-responsive"></a>
+				</figure>
+				<span class="fh5co-meta"><a href="#">标题:{$vo.video_title}</a></span>
+				<h2 class="fh5co-video-title"><a href="#">描述:{$vo.video_desc}</a></h2>
+				<span class="fh5co-meta fh5co-date">作者:{$vo.video_author}</span>
+
+
+			</article>
+			{/volist}
+		</div>
+	</div>
+
+	<footer id="fh5co-footer">
+		<p><small>&copy; 2018. VR-NAV HTML5. All Rights Reserverd. <br>vr<a href="#" target="_blank" ></a> - Design by -<a href="#" title="nav" target="_blank">nav</a></small></p>
+	</footer>
+
+
+
+	<!-- jQuery -->
+	<script src="__PUBLIC__/js/libs/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="__PUBLIC__/js/libs/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="__PUBLIC__/js/libs/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="__PUBLIC__/js/libs/jquery.waypoints.min.js"></script>
+	<!-- Main JS -->
+	<script src="__PUBLIC__/js/nav.js"></script>
+
+	</body>
+</html>

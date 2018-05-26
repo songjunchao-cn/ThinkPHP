@@ -1,0 +1,21 @@
+if(request()->isPost()){
+  $data=[
+    'article_title'=>input('title'),
+    'article_author'=>input('author'),
+    'article_desc'=>input('desc'),
+    'article_content'=>input('content'),
+  ];
+  if($_FILES['pic']['tmp_name']){
+     $file = request()->file('pic');
+     $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+     $data['article_pic']='/uploads/'.$info->getSaveName();
+  }
+  if(Db::name('article')->insert($data)) { 1
+     return json(['status'=>1, 'info'=>'添加成功']);
+  }
+    else{
+     return json(['status'=>0, 'info'=>'添加失败']);
+    }
+  return;
+}
+return $this->fetch();

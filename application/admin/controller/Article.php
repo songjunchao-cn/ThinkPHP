@@ -3,9 +3,15 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use app\admin\model\Article as ArticleModel;
-class Article extends Controller{
+class Article extends BaseAdmin{
 public function articlelist(){
-  $list = ArticleModel::paginate(5);
+  $count =db('article')->count();
+  $page = $this->request->param('page',1,'intval');
+  $limit = $this->request->param('limit',10,'intval');
+  $list = db('article')->order('article_id desc')->select();
+  $this->assign('count',$count);
+  $this->assign('page',$page);
+  $this->assign('limit',$limit);
   $this->assign('articlelist',$list);
   return $this->fetch();
  }
@@ -25,12 +31,12 @@ public function articleadd(){
         $data['article_pic']='/uploads/'.$info->getSaveName();
      }
 
-       var_dump($data);
+       // var_dump($data);
      if(Db::name('article')->insert($data)){
-       return $this->success('添加成功','articlelist');
+        return json(['status'=>1, 'info'=>'添加成功']);
      }
        else{
-         return $this->error('添加失败');
+        return json(['status'=>0, 'info'=>'添加失败']);
        }
    //   if(request()->isPost()){
    //   dump(input('post.'));
@@ -40,11 +46,14 @@ public function articleadd(){
    }
    return $this->fetch();
   }
+  public function successlist(){
+    return $this->fetch();
+  }
 public function articleedit(){
   $id= input('article_id');
-  dump($id);
+  // dump($id);
   $article = Db::table('article')->where('article_id',$id)->find();
-  dump($article);
+  // dump($article);
   $this->assign('article',$article);
 
   if(request()->isPost()){
@@ -67,10 +76,11 @@ public function articleedit(){
      // dump($data);die;
     if(Db::name('article')->where('article_id',$id)->update($data)){
       // $this->success('修改成功','articlelist');
-      $this->success('ar');
+
+      return json(['status'=>1, 'info'=>'添加成功']);
     }
     else{
-      $this->error('失败');
+      return json(['status'=>0, 'info'=>'添加失败']);
     }
       return;
     }
@@ -87,8 +97,17 @@ public function articledel(){
   }
   return $this->fetch();
  }
-public function articleview(){
-  return $this->fetch();
- }
+ public function articlesdel(){
+     $arr=input('checkedArr/a');
+     $id= join(',',$arr);
+     $del= db('article')->where(array('article_id' =>array('in',$id)))->delete();
+     if ($del) {
+         return json(['status'=>1, 'info'=>'删除成功']);
+     }
+     else {
+        return json(['status'=>0, 'info'=>'删除失败']);
+     }
+
+  }
 }
 ?>

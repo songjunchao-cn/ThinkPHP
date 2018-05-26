@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"C:\wamp64\www\tp5\public/../application/admin\view\slider\slideredit.html";i:1522154236;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"C:\wamp64\www\tp5\public/../application/admin\view\slider\slideredit.html";i:1526509715;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,8 +21,8 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form"  method="post"  enctype="multipart/form-data">
-              <!-- <input type="hidden" name="id" value="$web.web_id"> -->
+            <form class="layui-form"  method="post"  enctype="multipart/form-data" id="uploadForm">
+              <input type="hidden" name="slider_id" value="<?php echo $slider['slider_id']; ?>">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         标题
@@ -31,13 +31,7 @@
                         <input type="text" id="L_email" name="title" required lay-verify="text"
                         autocomplete="off" value="<?php echo $slider['slider_title']; ?>" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        如果您在邮箱已激活的情况下，变更了邮箱，需
-                        <a href="/user/activate/" style="font-size: 12px; color: #4f99cf;">
-                            重新验证邮箱
-                        </a>
-                        。
-                    </div>
+
                 </div>
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
@@ -47,6 +41,7 @@
                         <input type="text" id="L_username" name="author"
                         autocomplete="on" value="<?php echo $slider['slider_author']; ?>" class="layui-input">
                     </div>
+                    </div>
                 <div class="layui-form-item">
                     <label for="L_city" class="layui-form-label">
                         描述
@@ -55,6 +50,7 @@
                         <input type="text" id="L_city" name="desc" required lay-verify="text"
                         autocomplete="off" value="<?php echo $slider['slider_desc']; ?>"
                         class="layui-input">
+                    </div>
                     </div>
                 <div class="layui-form-item">
                     <label for="L_tel" class="layui-form-label">
@@ -73,7 +69,7 @@
                 <div class="layui-form-item">
                     <label for="L_tel" class="layui-form-label">
                     </label>
-                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
+                    <button class="layui-btn" id="slider-edit" type="button">
                         保存
                     </button>
                 </div>
@@ -85,14 +81,12 @@
     </div>
     <!-- 中部结束 -->
     <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
+    $("#slider-edit").click(
+  function (){
+    var url="<?php echo url('Slider/slideredit'); ?>";
+    var data= new FormData($('#uploadForm')[0]);
+    doAjax(url,data);
+  });
     </script>
 </body>
 </html>

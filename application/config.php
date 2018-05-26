@@ -143,6 +143,8 @@ return [
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
+    // 'dispatch_success_tmpl'  => APP_PATH . 'index' . DS . 'view/index/ok.html',
+    // 'dispatch_error_tmpl'    => APP_PATH . 'index' . DS . 'view/index/ok.html',
 
     // +----------------------------------------------------------------------
     // | 异常及错误设置
@@ -235,5 +237,17 @@ return [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
         'list_rows' => 15,
+    ],
+    //验证码配置
+    'captcha'                => [
+      //字符集
+        'codeSet' => '2345678923456789abcdefghjklmnopqrstuvwxyz',
+        'fontSize' => 18,
+        'useCurve' => false,
+        'imageW' => 110,
+        'imageH' => 36,
+        'length' => 3,
+        'reset' => true,
+        'secure' => false,
     ],
 ];
